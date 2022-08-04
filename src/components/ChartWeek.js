@@ -57,7 +57,7 @@ const test = [
 // }
 
 export default function ChartWeek() {
-    const [test, setData] = React.useState([]);
+    const [test, setTest] = useState([]);
 
     const { data } = useQuery(OBTENER_USUARIO_ACTUAL, {
         variables: {
@@ -74,18 +74,17 @@ export default function ChartWeek() {
                     rut: data.obtenerUser.rut
                 }
             }).then(resp => {
-                //let aux =resp.data.obtenerRegistros_ByUserRut
-                let aux2 = []
+                let aux =resp.data.obtenerRegistros_ByUserRut
+                console.log(aux)
+
                 resp.data.obtenerRegistros_ByUserRut.forEach(element => {
-                    aux2.push({ name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: data.obtenerUser.average, amt: element.medicion })
-                    setData(aux2)
-                    //test.push({ name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: data.obtenerUser.average, amt: element.medicion })
+
+                    setTest(test => [...test, { name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: data.obtenerUser.average, amt: element.medicion }])
                 });
-                //setData(aux2)
-                //console.log(test)
+
             })
         }
-    })
+    }, [data]);
 
 
     return (

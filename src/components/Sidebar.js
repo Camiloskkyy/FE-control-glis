@@ -33,10 +33,9 @@ const Sidebar = () => {
             </div>
 
             <nav className="mt-5 list-none">
-
+                {true && <Button onClick={() => setSmShow(true)}>Agregar Registro</Button>}                
                 <li>
 
-                    <Button onClick={() => setSmShow(true)}>Agregar Registro</Button>
                     <Modal
                         size="sm"
                         show={smShow}
