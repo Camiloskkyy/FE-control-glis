@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@apollo/client": "^3.6.9",
+    "@coreui/react": "^4.3.0",
     "@emotion/react": "^11.9.3",
     "@emotion/styled": "^11.9.3",
     "@mui/material": "^5.9.2",
@@ -20,6 +21,8 @@
     "react-bootstrap": "^2.4.0",
     "react-bootstrap-table-next": "^4.0.3",
     "react-charts": "^3.0.0-beta.38",
+    "react-chat-widget": "^3.1.4",
+    "react-chatbox-component": "^0.0.5",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",

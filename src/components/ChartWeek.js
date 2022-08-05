@@ -56,9 +56,9 @@ const test = [
 //   }
 // }
 
-export default function ChartWeek() {
+export default function ChartWeek({ rut }) {
     const [test, setTest] = useState([]);
-
+    console.log(rut)
     const { data } = useQuery(OBTENER_USUARIO_ACTUAL, {
         variables: {
             token: localStorage.getItem('token')
@@ -74,11 +74,8 @@ export default function ChartWeek() {
                     rut: data.obtenerUser.rut
                 }
             }).then(resp => {
-                let aux =resp.data.obtenerRegistros_ByUserRut
-                console.log(aux)
 
                 resp.data.obtenerRegistros_ByUserRut.forEach(element => {
-
                     setTest(test => [...test, { name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: data.obtenerUser.average, amt: element.medicion }])
                 });
 
@@ -88,7 +85,8 @@ export default function ChartWeek() {
 
 
     return (
-        <LineChart key={`lc_${test.length}`}
+        
+        <LineChart key={`lc_${rut}`}
             width={500}
             height={300}
             data={test}
@@ -104,7 +102,7 @@ export default function ChartWeek() {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Line key={`lc_${test.length}`}
+            <Line key={`lc_${rut}`}
                 type="monotone"
                 dataKey="Prom_Recomendado"
                 stroke="#8884d8"

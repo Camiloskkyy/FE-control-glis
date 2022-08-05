@@ -1,22 +1,17 @@
 import React, { useState } from "react";
-// import { gql } from '@apollo/client';
+import { gql } from '@apollo/client';
 import ModalRegistro from './ModalRegistro';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import ModalUser from './ModalUser';
+import { useQuery } from '@apollo/client';
 
-// const OBTENER_USUARIO_ACTUAL = gql`
-//     query obtenerUser ($token: String!){
-//         obtenerUser(token: $token) {
-//           rut
-//         }
-//     }
-// `;
+
 
 const Sidebar = () => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
-    
+
     // const triggerText = 'Agregar Registro';
 
     // let { data } = useQuery(OBTENER_USUARIO_ACTUAL, {
