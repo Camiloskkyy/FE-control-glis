@@ -66,7 +66,6 @@ export default function DataGridDemo() {
     client = useApolloClient();
     if (loading) return <p>Loading...</p>;
 
-    
     if(data){
         let i =0;
         data.obtenerUsers.forEach(element => {

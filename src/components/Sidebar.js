@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { gql } from '@apollo/client';
 import ModalRegistro from './ModalRegistro';
 import Button from 'react-bootstrap/Button';
@@ -8,17 +8,19 @@ import { useQuery } from '@apollo/client';
 
 
 
-const Sidebar = () => {
+const Sidebar = (data) => {
     const [smShow, setSmShow] = useState(false);
     const [lgShow, setLgShow] = useState(false);
+    const [type, setType] = useState(false)
 
-    // const triggerText = 'Agregar Registro';
+    useEffect(() => {
+        if (data.data !== undefined) {
+            setType(data.data.obtenerUser.type === "medico")
+        }
+    }, [data.data])
 
-    // let { data } = useQuery(OBTENER_USUARIO_ACTUAL, {
-    //     variables: {
-    //         token: localStorage.getItem('token')
-    //     }
-    // });
+
+
 
     return (
 
@@ -28,7 +30,7 @@ const Sidebar = () => {
             </div>
 
             <nav className="mt-5 list-none">
-                {true && <Button onClick={() => setSmShow(true)}>Agregar Registro</Button>}                
+                {<Button onClick={() => setSmShow(true)}>Agregar Registro</Button>}
                 <li>
 
                     <Modal
@@ -41,12 +43,12 @@ const Sidebar = () => {
                             <h4 className="w-100 text-center">Agregar Registro</h4>
                         </Modal.Header>
                         <Modal.Body>
-                            <ModalRegistro setSmShow={setSmShow}/>
+                            <ModalRegistro setSmShow={setSmShow} />
                         </Modal.Body>
                     </Modal>
                 </li>
                 <li className="pt-3">
-                <Button onClick={() => setLgShow(true)}>Agregar Usuario</Button>
+                    {type && <Button onClick={() => setLgShow(true)}>Agregar Usuario</Button>}
                     <Modal
                         size="sm"
                         show={lgShow}
@@ -57,7 +59,7 @@ const Sidebar = () => {
                             <h4 className="w-100 text-center">Agregar Usuario</h4>
                         </Modal.Header>
                         <Modal.Body>
-                            <ModalUser setLgShow={setLgShow}/>
+                            <ModalUser setLgShow={setLgShow} />
                         </Modal.Body>
                     </Modal>
                 </li>
