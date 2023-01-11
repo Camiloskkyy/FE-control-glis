@@ -7,7 +7,7 @@ import { ApolloClient, InMemoryCache, ApolloProvider} from '@apollo/client';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 const client = new ApolloClient({
-  uri: 'http://192.168.100.100:4000',
+  uri: 'https://apollo-server-cmp.herokuapp.com',
   cache: new InMemoryCache(),
 });
 

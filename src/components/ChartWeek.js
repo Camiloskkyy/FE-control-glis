@@ -23,8 +23,18 @@ query obtenerRegistros_ByUserRut($rut: String!) {
 }
 `;
 
+const OBTENER_USUARIO_RUT = gql`
+     query obtenerUser_ByRut ($rut: String!){
+         obtenerUser_ByRut(rut: $rut) {
+           rut
+           type
+           average
+         }
+     }
+`;
+
 const client = new ApolloClient({
-    uri: 'http://192.168.100.100:4000',
+    uri: 'https://apollo-server-cmp.herokuapp.com',
     cache: new InMemoryCache(),
 });
 
@@ -64,17 +74,28 @@ export default function ChartWeek({ }) {
     }, [data]);
     console.log(medic)
     const handleSubmit = () => {
+
         client.query({
-            query: obtenerRegistros_ByUserRut,
+            query: OBTENER_USUARIO_RUT,
             variables: {
                 rut: inputRut
             }
-        }).then(resp => {
-            setTest([])
-            resp.data.obtenerRegistros_ByUserRut.forEach(element => {
-                setTest(test => [...test, { name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: data.obtenerUser.average, amt: element.medicion }])
-            });
+        }).then(auxResp => {
+            client.query({
+                query: obtenerRegistros_ByUserRut,
+                variables: {
+                    rut: inputRut
+                }
+            }).then(resp => {
+                setTest([])
+                resp.data.obtenerRegistros_ByUserRut.forEach(element => {
+                    setTest(test => [...test, { name: element.fecha_creacion, Medicion: element.medicion, Prom_Recomendado: auxResp.data.obtenerUser_ByRut.average, amt: element.medicion }])
+                });
+            })
         })
+
+
+
     }
 
     return (

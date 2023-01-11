@@ -17,7 +17,7 @@ const OBTENER_USUARIO_ACTUAL = gql`
 `;
 
 const client = new ApolloClient({
-    uri: 'http://192.168.100.100:4000',
+    uri: 'https://apollo-server-cmp.herokuapp.com',
     cache: new InMemoryCache(),
 });
 
@@ -134,12 +134,16 @@ const Layout = ({ children }) => {
                     <Sidebar data={data} />
                     <Widget
                         handleNewUserMessage={handleNewUserMessage}
-                        title="Control Glis"
+                        title="Ctrl Glis"
                         subtitle="Chat con tu medico"
                     />
-                    <main className='sm:w-2/3 xl:w-4/5 sm:min-h-screen p-5'>
+                    <main className='grayscale sm:w-2/3 xl:w-4/5 sm:min-h-screen p-5' STYLE="background:url('https://img.freepik.com/fotos-premium/doctor-medicina-estetoscopio-sosteniendo-formulario-solicitud-blanco_43284-1855.jpg?w=1380')">
                         {currentType && < Table />}
                         <ChartWeek />
+                        <p class="text-red-600">Recomendacion: no superar mas de 28 mg/Dl el promedio indicado</p>
+                        <p class="text-red-600">Recomendacion: no disminuir mas de 28 mg/Dl el promedio indicado</p>
+                        <p class="text-red-600">Recomendacion: Mantenerse dentro del promedio indicado</p>
+                        <p class="text-red-600">Recomendacion: En caso de sobrepasar los valores contactar al medico</p>
                     </main>
 
                 </div>
